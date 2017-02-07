@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 系统级别的配置文件 -->
+
+<config>
+
+	<project>
+		<name>tievoli</name>
+		<version>1.0.0</version>
+	</project>
+
+	<redis>
+		<ip>192.168.100.35</ip>
+		<port>6379</port>
+		<pass>yescai2015</pass>
+		<maxIdle>300</maxIdle>
+		<maxActive>600</maxActive>
+		<maxWait>1000</maxWait>
+		<testOnBorrow>true</testOnBorrow>
+	</redis>
+	<sftp>
+		<ip>123.57.46.173</ip>
+		<port>22</port>
+		<userName>mysftp</userName>
+		<passWord>As#cf!d</passWord>
+	</sftp>
+	<file>
+		<prefix>http://www.yescai.com</prefix>
+		<filePath>/upload</filePath>
+		<localPath>/tmp</localPath>
+		<fileType>gif,jpg,jpeg,bmp,swf,png,rar,doc,docx,xls,xlsx,pdf,zip,ico,txt
+		</fileType>
+	</file>
+
+	<dubbo>
+		<zk>
+			<address>192.168.100.38:4181,192.168.100.38:4182,192.168.100.38:4183
+			</address>
+			<group>b2b-dev</group>
+			<edmGrp>b2b-dev</edmGrp>
+			<retries>0</retries>
+			<timeout>3000</timeout>
+			<check>false</check>
+		</zk>
+		<version>1.0.0</version>
+	</dubbo>
+
+	<edm>
+		<env>test</env>
+	</edm>
+</config>

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.tievoli.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="org.tievoli.model.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="login_times" jdbcType="INTEGER" property="loginTimes" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="reg_dtm" jdbcType="TIMESTAMP" property="regDtm" />
+    <result column="valid_phone" jdbcType="INTEGER" property="validPhone" />
+    <result column="valid_email" jdbcType="INTEGER" property="validEmail" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="signuature" jdbcType="VARCHAR" property="signuature" />
+    <result column="article_num" jdbcType="INTEGER" property="articleNum" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+    <result column="active_dtm" jdbcType="TIMESTAMP" property="activeDtm" />
+    <result column="user_level" jdbcType="INTEGER" property="userLevel" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="weibo" jdbcType="VARCHAR" property="weibo" />
+    <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="last_login_dtm" jdbcType="TIMESTAMP" property="lastLoginDtm" />
+    <result column="login_dtm" jdbcType="TIMESTAMP" property="loginDtm" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_name, phone, email, password, login_times, sex, age, reg_dtm, 
+    valid_phone, valid_email, nick_name, signuature, article_num, comment_num, active_dtm, 
+    user_level, user_status, avatar, qq, weibo, weixin, last_login_dtm, login_dtm
+  </sql>
+  <select id="selectByExample" parameterType="org.tievoli.model.UserCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tievoli_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tievoli_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tievoli_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.tievoli.model.UserCriteria">
+    delete from tievoli_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.tievoli.model.User">
+    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tievoli_user (user_id, user_name, 
+      phone, email, password, 
+      login_times, sex, age, 
+      reg_dtm, valid_phone, valid_email, 
+      nick_name, signuature, article_num, 
+      comment_num, active_dtm, user_level, 
+      user_status, avatar, qq, 
+      weibo, weixin, last_login_dtm, 
+      login_dtm)
+    values (#{userId,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{loginTimes,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, 
+      #{regDtm,jdbcType=TIMESTAMP}, #{validPhone,jdbcType=INTEGER}, #{validEmail,jdbcType=INTEGER}, 
+      #{nickName,jdbcType=VARCHAR}, #{signuature,jdbcType=VARCHAR}, #{articleNum,jdbcType=INTEGER}, 
+      #{commentNum,jdbcType=INTEGER}, #{activeDtm,jdbcType=TIMESTAMP}, #{userLevel,jdbcType=INTEGER}, 
+      #{userStatus,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{weibo,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{lastLoginDtm,jdbcType=TIMESTAMP}, 
+      #{loginDtm,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.tievoli.model.User">
+    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tievoli_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      user_id,
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="loginTimes != null">
+        login_times,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="regDtm != null">
+        reg_dtm,
+      </if>
+      <if test="validPhone != null">
+        valid_phone,
+      </if>
+      <if test="validEmail != null">
+        valid_email,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="signuature != null">
+        signuature,
+      </if>
+      <if test="articleNum != null">
+        article_num,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+      <if test="activeDtm != null">
+        active_dtm,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="weibo != null">
+        weibo,
+      </if>
+      <if test="weixin != null">
+        weixin,
+      </if>
+      <if test="lastLoginDtm != null">
+        last_login_dtm,
+      </if>
+      <if test="loginDtm != null">
+        login_dtm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{userId,jdbcType=INTEGER},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTimes != null">
+        #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="regDtm != null">
+        #{regDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validPhone != null">
+        #{validPhone,jdbcType=INTEGER},
+      </if>
+      <if test="validEmail != null">
+        #{validEmail,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="signuature != null">
+        #{signuature,jdbcType=VARCHAR},
+      </if>
+      <if test="articleNum != null">
+        #{articleNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="activeDtm != null">
+        #{activeDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null">
+        #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDtm != null">
+        #{lastLoginDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginDtm != null">
+        #{loginDtm,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.tievoli.model.UserCriteria" resultType="java.lang.Integer">
+    select count(*) from tievoli_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tievoli_user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginTimes != null">
+        login_times = #{record.loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.regDtm != null">
+        reg_dtm = #{record.regDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validPhone != null">
+        valid_phone = #{record.validPhone,jdbcType=INTEGER},
+      </if>
+      <if test="record.validEmail != null">
+        valid_email = #{record.validEmail,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signuature != null">
+        signuature = #{record.signuature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleNum != null">
+        article_num = #{record.articleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNum != null">
+        comment_num = #{record.commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.activeDtm != null">
+        active_dtm = #{record.activeDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userLevel != null">
+        user_level = #{record.userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.userStatus != null">
+        user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null">
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weibo != null">
+        weibo = #{record.weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixin != null">
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginDtm != null">
+        last_login_dtm = #{record.lastLoginDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginDtm != null">
+        login_dtm = #{record.loginDtm,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tievoli_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      login_times = #{record.loginTimes,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=INTEGER},
+      reg_dtm = #{record.regDtm,jdbcType=TIMESTAMP},
+      valid_phone = #{record.validPhone,jdbcType=INTEGER},
+      valid_email = #{record.validEmail,jdbcType=INTEGER},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      signuature = #{record.signuature,jdbcType=VARCHAR},
+      article_num = #{record.articleNum,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      active_dtm = #{record.activeDtm,jdbcType=TIMESTAMP},
+      user_level = #{record.userLevel,jdbcType=INTEGER},
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      weibo = #{record.weibo,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      last_login_dtm = #{record.lastLoginDtm,jdbcType=TIMESTAMP},
+      login_dtm = #{record.loginDtm,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.tievoli.model.User">
+    update tievoli_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTimes != null">
+        login_times = #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="regDtm != null">
+        reg_dtm = #{regDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validPhone != null">
+        valid_phone = #{validPhone,jdbcType=INTEGER},
+      </if>
+      <if test="validEmail != null">
+        valid_email = #{validEmail,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="signuature != null">
+        signuature = #{signuature,jdbcType=VARCHAR},
+      </if>
+      <if test="articleNum != null">
+        article_num = #{articleNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="activeDtm != null">
+        active_dtm = #{activeDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null">
+        weibo = #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDtm != null">
+        last_login_dtm = #{lastLoginDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginDtm != null">
+        login_dtm = #{loginDtm,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.tievoli.model.User">
+    update tievoli_user
+    set 
+      user_name = #{userName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      login_times = #{loginTimes,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      reg_dtm = #{regDtm,jdbcType=TIMESTAMP},
+      valid_phone = #{validPhone,jdbcType=INTEGER},
+      valid_email = #{validEmail,jdbcType=INTEGER},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      signuature = #{signuature,jdbcType=VARCHAR},
+      article_num = #{articleNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      active_dtm = #{activeDtm,jdbcType=TIMESTAMP},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      user_status = #{userStatus,jdbcType=INTEGER},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      last_login_dtm = #{lastLoginDtm,jdbcType=TIMESTAMP},
+      login_dtm = #{loginDtm,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectUserByUserName" parameterType="string" resultMap="BaseResultMap">
+  	select
+  	 <include refid="Base_Column_List" />
+    from tievoli_user 
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+</mapper>

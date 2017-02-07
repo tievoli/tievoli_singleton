@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>向用户展示的Exception信息</comment>
+	
+	<entry key="cmm.info.001">成功. </entry>
+	<entry key="cmm.err.000">{0}</entry>
+	<entry key="cmm.err.001">系统发生故障,请稍后重试! </entry>
+	<entry key="cmm.err.002">系统发生异常,{0}</entry>
+	<entry key="cmm.err.003">操作失败,原因：{0}</entry>
+	<entry key="cmm.warn.001">部分信息存在问题. </entry>
+	
+	<!-- API -->
+	<entry key="api.err.001">系统发生异常,{0}</entry>
+	
+	<!-- ORD -->
+	<entry key="ord.err.001">生成订单失败. </entry>
+	<entry key="ord.err.002">该订单号[{0}]已经存在. </entry>
+	<entry key="ord.err.003">未录入任何订单信息,不能完成处理.</entry>
+	
+	<!-- CLOUD CATEGORY -->
+	<entry key="cat.err.001">该品类已经存在.</entry>
+	<entry key="cat.err.002">无法删除该品类,该品类存在子节点.</entry>
+	
+	<!-- Ticket Category -->
+	<entry key="tck.err.001">系统发生异常,{0}.</entry>
+	
+</properties>

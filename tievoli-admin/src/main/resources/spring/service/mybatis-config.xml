@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="jdbcTypeForNull" value="VARCHAR" />
+		<setting name="defaultStatementTimeout" value="240" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="safeRowBoundsEnabled" value="false" />
+		<setting name="localCacheScope" value="SESSION" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+
+	<typeHandlers>
+		<typeHandler handler="org.tievoli.framework.mybatis.ObjectTypeHandler"
+			javaType="java.lang.Object" />
+	</typeHandlers>
+
+	<plugins>
+		<plugin interceptor="org.tievoli.framework.web.interceptor.PageInterceptor">
+			<property name="databaseType" value="mysql" />
+		</plugin>
+	</plugins>
+
+</configuration>

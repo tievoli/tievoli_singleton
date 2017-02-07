@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 系统级别的配置文件 -->
+
+<config>
+
+	<project>
+		<name>tievoli</name>
+		<version>1.0.0</version>
+	</project>
+
+	<shiro>
+		<session>
+			<sessionTimeout>1800000</sessionTimeout>
+			<sessionTimeoutClean>120000</sessionTimeoutClean>
+		</session>
+	</shiro>
+</config>
